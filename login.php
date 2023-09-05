@@ -27,4 +27,16 @@
 
 
 
-<?php require("./components/footer.php") ?>
+<?php 
+
+    session_start();
+
+    if(isset($_SESSION['message'])){
+        $message = $_SESSION['message'];
+        echo "<h3>".$message."</h3>";
+
+        unset($_SESSION['message']);
+    }
+    
+    require("./components/footer.php") 
+?>
