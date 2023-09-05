@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/09/2023 às 03:12
+-- Tempo de geração: 05/09/2023 às 15:59
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -32,7 +32,6 @@ USE `ads_si_umc23`;
 CREATE TABLE `ruan_comment` (
   `id` int(11) NOT NULL,
   `description` varchar(150) NOT NULL,
-  `liked` int(11) NOT NULL,
   `publisher_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()

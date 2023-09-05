@@ -3,7 +3,7 @@
     require("./validation/isLogged.php");
 ?>
 
-<form action="./validation/createPost.php" method="POST">
+<form action="./validation/postCreate.php" method="POST">
         <input required type="text" name="title" id="title" placeholder="Insira o titulo de sua postagem">
 
         <input required type="text" name="subtitle" id="subtitle" placeholder="Insira o sub-titulo de sua postagem">
