@@ -1,6 +1,6 @@
 <?php 
     require("./components/header.php"); 
-    include_once("database.php");
+    require("./database.php");
 
     global $connection;
 
@@ -14,6 +14,22 @@
 
     $sql_get_users = "SELECT * FROM ruan_user";
     $user_response = mysqli_query($connection, $sql_get_users);
+
+    if($_GET){
+        if(isset($_GET['deleteCommentId'])){
+            DeleteComment($connection, $_GET['deleteCommentId']);
+        }
+    }
+
+    function DeleteComment($conexaocaralho, $id) {
+        $sql_delete_comment = "DELETE FROM ruan_comment WHERE id = $id";
+
+        if(mysqli_query($conexaocaralho, $sql_delete_comment)) {
+            header("location:index.php");
+        } 
+    }
+
+
 ?>
 
 <h1>Listando Posts</h1>
@@ -50,7 +66,11 @@
             echo "</form>";
             while ($comment = mysqli_fetch_array($comment_response)) {
                 if($comment["post_id"] == $row["id"]) {
-                    echo "<p?>".$comment["content"]."</p>";
+                    echo "<p>".$comment["content"]."</p>";
+                    if($comment["publisher_id"] == $user['id'] OR $user["profile"] == true OR $row["publisher_id"] == $user['id']) {
+                        echo "<a href='postEdit.php?post_id=".$row["id"]."'> Editar </a>";
+                        echo "<button onClick=\"location.href='?deleteCommentId=".$comment['id']."'\"> excluir </button>";
+                    };
                 }
             }
             $comment_response = mysqli_query($connection, $sql_get_comments);
