@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/09/2023 às 15:59
+-- Tempo de geração: 06/09/2023 às 04:06
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -31,11 +31,23 @@ USE `ads_si_umc23`;
 
 CREATE TABLE `ruan_comment` (
   `id` int(11) NOT NULL,
-  `description` varchar(150) NOT NULL,
+  `content` varchar(150) NOT NULL,
   `publisher_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `ruan_comment`
+--
+
+INSERT INTO `ruan_comment` (`id`, `content`, `publisher_id`, `post_id`, `created_at`) VALUES
+(3, 'comentario', 1, 7, '2023-09-06 00:40:25'),
+(4, 'comentario', 1, 8, '2023-09-06 00:40:27'),
+(5, 'comentario', 1, 9, '2023-09-06 00:40:30'),
+(6, 'kkkk', 1, 9, '2023-09-06 02:04:58'),
+(7, 'burro', 1, 8, '2023-09-06 02:05:03'),
+(8, 'caralho', 1, 7, '2023-09-06 02:05:07');
 
 -- --------------------------------------------------------
 
@@ -57,7 +69,9 @@ CREATE TABLE `ruan_post` (
 --
 
 INSERT INTO `ruan_post` (`id`, `title`, `sub_title`, `content`, `publisher_id`, `created_at`) VALUES
-(2, 'titulo', 'sub-titulo', 'conteudo', 2, '2023-09-05 00:29:29');
+(7, 'postagem', 'sub-titulo postagem', 'conteudo da postagem', 1, '2023-09-06 00:39:01'),
+(8, 'postagem', 'sub-titulo postagem', 'dddd', 1, '2023-09-06 00:39:09'),
+(9, 'postagem6', 'sub-titulo postagem', 'conteudo da postagem', 1, '2023-09-06 00:39:28');
 
 -- --------------------------------------------------------
 
@@ -81,7 +95,7 @@ CREATE TABLE `ruan_user` (
 --
 
 INSERT INTO `ruan_user` (`id`, `name`, `email`, `password`, `question`, `response`, `is_admin`, `created_at`) VALUES
-(1, 'admin', 'admin@email.com', 'admin', 'animal', 'dog', 1, '2023-09-04 23:08:03'),
+(1, 'admim', 'admin@email.com', 'admin', 'animal', 'dog', 1, '2023-09-04 23:08:03'),
 (2, 'ruan', 'ruan@email.com', '123456', 'animal', 'dog', 0, '2023-09-05 00:26:31'),
 (3, 'yasmin', 'yasmin@email.com', '123456', 'animal', 'cat', 0, '2023-09-05 00:30:49');
 
@@ -120,13 +134,13 @@ ALTER TABLE `ruan_user`
 -- AUTO_INCREMENT de tabela `ruan_comment`
 --
 ALTER TABLE `ruan_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `ruan_post`
 --
 ALTER TABLE `ruan_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `ruan_user`

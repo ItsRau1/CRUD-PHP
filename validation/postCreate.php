@@ -1,6 +1,6 @@
 <?php
     include_once("../database.php");
-    require("./isLogged.php");
+    session_start();
     global $connection;
 
     $user = $_SESSION['login'];

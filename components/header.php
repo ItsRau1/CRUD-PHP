@@ -10,3 +10,17 @@
         <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body>
+        <?php 
+            session_start();
+
+            if($_SESSION['login'] ?? false){
+                if(!str_contains($_SERVER["REQUEST_URI"], "login.php") AND !str_contains($_SERVER["REQUEST_URI"], "register.php")){
+                    echo "<div class='sideMenu-container'>";
+                    echo "<a href='./postCreate.php'> Criar um Post </a>";
+                    echo "</div>";
+                };
+            } elseif (!str_contains($_SERVER["REQUEST_URI"], "login.php")) {
+                header("location:./login.php");
+            }
+        ?>
+        <div class="main-container">

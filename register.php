@@ -36,7 +36,6 @@
 
 
 <?php 
-    session_start();
 
     if(isset($_SESSION['message'])){
         $message = $_SESSION['message'];
