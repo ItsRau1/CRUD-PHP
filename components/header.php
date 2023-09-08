@@ -19,7 +19,7 @@
                         echo "<a href='./postCreate.php'> Criar um Post </a>";
                     echo "</div>";
                 };
-            } elseif (!str_contains($_SERVER["REQUEST_URI"], "login.php")) {
+            } elseif (!str_contains($_SERVER["REQUEST_URI"], "login.php") AND !str_contains($_SERVER["REQUEST_URI"], "register.php")) {
                 header("location:./login.php");
             }
         ?>

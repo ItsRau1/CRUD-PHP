@@ -31,52 +31,74 @@
 
 
 ?>
+<div class="main-index">
+    <?php 
+        if(isset($_SESSION['message'])){
+            $message = $_SESSION['message'];
+            echo "<h3>".$message."</h3>";
 
-<h1>Listando Posts</h1>
+            unset($_SESSION['message']);
+        }
+    ?>
 
-<?php 
-    if(isset($_SESSION['message'])){
-        $message = $_SESSION['message'];
-        echo "<h3>".$message."</h3>";
+    <div class="container-posts">
+        <?php
+            while ($row = mysqli_fetch_array($post_response)) {
+                echo "<div class='box-post'>";
+                    echo "<div class='post-header'>";
+                        while ($publisher = mysqli_fetch_assoc($user_response)) { 
+                            if($publisher["id"] == $row["publisher_id"]) { 
+                                echo "<a  class='post-user' href='profile.php?id=".$publisher["id"]."'> <img src='./assets/profile.svg'/>".$publisher["name"]."</a>"; 
+                            } 
+                        }
+                        $user_response = mysqli_query($connection, $sql_get_users);
+                        if($row["publisher_id"] == $user['id'] OR $user["profile"] == true) {
+                            echo "<div class='post-actions'>";
+                                echo "<a class='post-edit' href='postEdit.php?post_id=".$row["id"]."'> Editar </a>";
+                                echo "<a class='post-delete' href='./validation/postDelete.php?post_id=".$row["id"]."'> Remover </a>";
+                            echo "</div>";
+                        };
+                    echo "</div>";
+                    echo "<div class='post-content'>";
+                        echo "<p class='post-title'>".$row["title"]."</p>";
+                        echo "<p class='post-sub-title'>".$row["sub_title"]."</p>";
+                        echo "<p class='post-text'>".$row["content"]."</p>";
+                    echo "</div>";
 
-        unset($_SESSION['message']);
-    }
-?>
-
-<?php
-    while ($row = mysqli_fetch_array($post_response)) {
-        echo "<div>";
-            while ($publisher = mysqli_fetch_assoc($user_response)) { 
-                if($publisher["id"] == $row["publisher_id"]) { 
-                    echo "<h3><a href='profile.php?id=".$publisher["id"]."'>".$publisher["name"]."</a></h3>"; 
-                } 
+                    echo "<form class='comment-form' action='./validation/createComment.php' method='POST'>";
+                        echo "<input type='hidden' name='id' value='".$row["id"]."'>";
+                        echo "<input class='comment-input' required type='text' name='comment' id='comment' placeholder='Comente a postagem'>";
+                        echo "<input class='comment-button' type='submit' value='Comentar'>";
+                    echo "</form>";
+                    echo "<div class='comment-container'>";
+                        while ($comment = mysqli_fetch_array($comment_response)) {
+                            echo "<div class='comment-box'>";
+                                if($comment["post_id"] == $row["id"]) {
+                                    echo "<div class='comment-header'>";
+                                        while ($publisher = mysqli_fetch_assoc($user_response)) { 
+                                            if($publisher["id"] == $comment["publisher_id"]) { 
+                                                echo "<a  class='comment-user' href='profile.php?id=".$publisher["id"]."'> <img src='./assets/profile-comment.svg'/>".$publisher["name"]."</a>"; 
+                                            } 
+                                        }
+                                        $user_response = mysqli_query($connection, $sql_get_users);
+                                        if($comment["publisher_id"] == $user['id'] OR $user["profile"] == true OR $row["publisher_id"] == $user['id']) {
+                                            echo "<div class='post-actions'>";
+                                                echo "<a class='post-edit' href='postEdit.php?post_id=".$row["id"]."'> Editar </a>";
+                                                echo "<button class='comment-delete' onClick=\"location.href='?deleteCommentId=".$comment['id']."'\"> Excluir </button>";
+                                            echo "</div>";
+                                        };
+                                    echo "</div>";
+                                    echo "<p class='comment-content'>".$comment["content"]."</p>";
+                                }
+                            echo "</div>";
+                        }
+                        $comment_response = mysqli_query($connection, $sql_get_comments);
+                    echo "</div>";
+                echo "</div>";
             }
-            $user_response = mysqli_query($connection, $sql_get_users);
-            echo "<h3>".$row["title"]."</h3>";
-            echo "<h4>".$row["sub_title"]."</h4>";
-            echo "<p>".$row["content"]."</p>";
-            if($row["publisher_id"] == $user['id'] OR $user["profile"] == true) {
-                echo "<a href='postEdit.php?post_id=".$row["id"]."'> Editar </a>";
-                echo "<a href='./validation/postDelete.php?post_id=".$row["id"]."'> Remover </a>";
-            };
-            echo "<form action='./validation/createComment.php' method='POST'>";
-                echo "<input type='hidden' name='id' value='".$row["id"]."'>";
-                echo "<input required type='text' name='comment' id='comment' placeholder='Comente a postagem'>";
-                echo "<input type='submit' value='Comentar'>";
-            echo "</form>";
-            while ($comment = mysqli_fetch_array($comment_response)) {
-                if($comment["post_id"] == $row["id"]) {
-                    echo "<p>".$comment["content"]."</p>";
-                    if($comment["publisher_id"] == $user['id'] OR $user["profile"] == true OR $row["publisher_id"] == $user['id']) {
-                        echo "<a href='postEdit.php?post_id=".$row["id"]."'> Editar </a>";
-                        echo "<button onClick=\"location.href='?deleteCommentId=".$comment['id']."'\"> excluir </button>";
-                    };
-                }
-            }
-            $comment_response = mysqli_query($connection, $sql_get_comments);
-        echo "</div>";
-    }
-?>
+        ?>
+    </div>
+</div>
 
 
     
