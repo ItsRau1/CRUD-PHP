@@ -17,7 +17,7 @@
             <?php
                 if(isset($_SESSION['message'])){
                     $message = $_SESSION['message'];
-                    echo "<h3>".$message."</h3>";
+                    echo "<p class='message'>".$message."</p>";
             
                     unset($_SESSION['message']);
                 }
@@ -31,7 +31,7 @@
             <input type="submit" value="Entrar"  class="form-button">
         </form>
         <div class="box-links">
-            <a href="#">Esqueceu sua senha?</a>
+            <!-- <a href="#">Esqueceu sua senha?</a> -->
             <p>Ainda nao tem uma conta?<a href="./register.php"> Cadastre-se</a></p>
         </div>
     </div>

@@ -35,7 +35,7 @@
     <?php 
         if(isset($_SESSION['message'])){
             $message = $_SESSION['message'];
-            echo "<h3>".$message."</h3>";
+            echo "<p class='message'>".$message."</p>";
 
             unset($_SESSION['message']);
         }
@@ -83,7 +83,7 @@
                                         $user_response = mysqli_query($connection, $sql_get_users);
                                         if($comment["publisher_id"] == $user['id'] OR $user["profile"] == true OR $row["publisher_id"] == $user['id']) {
                                             echo "<div class='post-actions'>";
-                                                echo "<a class='post-edit' href='postEdit.php?post_id=".$row["id"]."'> Editar </a>";
+                                                echo "<a class='post-edit' href='commentEdit.php?comment_id=".$comment["id"]."'> Editar </a>";
                                                 echo "<button class='comment-delete' onClick=\"location.href='?deleteCommentId=".$comment['id']."'\"> Excluir </button>";
                                             echo "</div>";
                                         };

@@ -18,7 +18,7 @@
         <?php
             if(isset($_SESSION['message'])){
                 $message = $_SESSION['message'];
-                echo "<h3>".$message."</h3>";
+                echo "<p class='message'>".$message."</p>";
         
                 unset($_SESSION['message']);
             }
