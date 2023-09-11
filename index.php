@@ -21,17 +21,17 @@
         }
     }
 
-    function DeleteComment($conexaocaralho, $id) {
+    function DeleteComment($connectionParam, $id) {
         $sql_delete_comment = "DELETE FROM ruan_comment WHERE id = $id";
 
-        if(mysqli_query($conexaocaralho, $sql_delete_comment)) {
+        if(mysqli_query($connectionParam, $sql_delete_comment)) {
             header("location:index.php");
         } 
     }
 
 
 ?>
-<div class="main-index">
+<div class="main-index-posts">
     <?php 
         if(isset($_SESSION['message'])){
             $message = $_SESSION['message'];

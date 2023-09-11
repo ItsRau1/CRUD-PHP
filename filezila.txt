@@ -1,7 +1,0 @@
-server: ads_si_umc23.mysql.dbaas.com.br
-
-user: ads_si_umc23
-
-password: ADSumcSI23!
-
-name: ads_si_umc23

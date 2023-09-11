@@ -16,10 +16,12 @@
 
             if($_SESSION['login'] ?? false){
                 if(!str_contains($_SERVER["REQUEST_URI"], "login.php") AND !str_contains($_SERVER["REQUEST_URI"], "register.php")){
+                    $user = $_SESSION['login'];
                     echo "<div class='sideMenu-container'>";
-                        echo "<a href='./index.php'><img src='./assets/logo-text.svg' class='sideMenu-logo'/></a>";
-                        echo "<a href='./postCreate.php' class='sideMenu-link'>Criar um Post <img src='./assets/add.svg'/></a>";
+                        echo "<a title='Menu Principal' href='./index.php'><img src='./assets/logo-text.svg' class='sideMenu-logo'/></a>";
+                        echo "<a title='Criar Uma Postagem' href='./postCreate.php' class='sideMenu-link'>Criar um Post <img src='./assets/add.svg'/></a>";
                         echo "<div class='sideMenu-actions'>";
+                            echo "<a title='Editar seu Perfil' href='./userEdit.php?id=".$user["id"]."'> <img src='./assets/profile-edit.svg' class='sideMenu-logo'/> </a>";
                         echo "</div>";
                     echo "</div>";
                 };
